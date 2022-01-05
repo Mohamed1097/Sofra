@@ -137,6 +137,21 @@ $('.search-btn').click(function(event) {
 		window.location=url;
 	}
 });
+$('.select-all').change(function(event) {
+        let options=this.parentElement.querySelectorAll('select option');
+        if (this.checked==true) {
+                options.forEach( function(element, index) {
+                    element.selected=true;
+                });
+        }
+        else
+        {
+            options.forEach( function(element, index) {
+                    element.selected=false;
+                });
+        }
+        });
+
 
 
 

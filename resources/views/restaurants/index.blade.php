@@ -127,29 +127,4 @@
             </div>
           </div>
     </section>
-    
-    @push('custom-scripts')
-    <script>
-      $('.check').click(function(){
-        let input=this.parentElement.parentElement.querySelectorAll('.input');
-        if(input.length>1)
-        {
-          input=input[1]
-        }
-        else
-        {
-          input=input[0];
-        }
-        if(this.checked==true)
-        {
-          console.log(input);
-          input.disabled=false;
-        }
-        else {
-        input.disabled=true;
-        }
-      })
-    </script>
-      
-    @endpush
   @endsection

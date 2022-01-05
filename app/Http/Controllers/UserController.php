@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,7 +37,8 @@ class UserController extends Controller
     }
     public function index()
     {
-        //
+        $users=User::paginate();
+        return view('users.index',['title'=>'Users','users'=>$users]);
     }
 
     /**
@@ -46,7 +48,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create',['title'=>'Create New User']);
     }
 
     /**
@@ -57,7 +59,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator=validator()->make($request->all(), [
+            'name' => 'required|string|min:2',
+            'password' => 'required|string|min:8|confirmed',
+            'email' => 'required|email|unique:users,email',
+            'roles'  => 'required|array',
+            'roles.*'=>'exists:roles,id'
+        ]);
+        if($validator->fails())
+        {
+            return redirect(route('admin.users.create'))->withErrors($validator->errors());
+        }
+        $user=User::create($request->all());
+        $user->syncRoles($request->roles);
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -79,7 +94,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user=User::findOrFail($id);
+        $title='Edit '.$user->name;
+        return view('users.edit',['title'=>$title,'user'=>$user]);
     }
 
     /**
@@ -91,7 +108,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator=validator($request->all(),['roles'=>'required|array','roles.*'=>'required|exists:roles,id']);
+        if ($validator->fails()) {
+            return redirect()->route('admin.users.edit')->withErrors($validator->errors());
+        }
+        $user=User::findOrFail($id);
+        $user->syncRoles($request->roles);
+        return redirect()->route('admin.users.index');
     }
 
     /**

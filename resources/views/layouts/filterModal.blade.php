@@ -12,22 +12,12 @@
         <form action={{route('admin.restaurants.index')}} method="GET">
             <div class="modal-body">
               <div class="form-group">
-                <div class="icheck-primary d-inline">
-                    <input type="checkbox" id="checkboxPrimary1" class="check">
-                    <label for="checkboxPrimary1">
-                    </label>
-                  </div>
                 <label for="exampleInputEmail1">Restaurant Name</label>
-                <input type="text" class="form-control input" id="exampleInputEmail1" placeholder="Enter Restaurant Name" name="name" disabled>
+                <input type="text" class="form-control input" id="exampleInputEmail1" placeholder="Enter Restaurant Name" name="name">
             </div>
             <div class="form-group">
-              <div class="icheck-primary d-inline">
-                  <input type="checkbox" id="checkboxPrimary1" class="check">
-                  <label for="checkboxPrimary1">
-                  </label>
-                </div>
                 <label for="exampleDataList" class="form-label">City</label>
-                <input class="form-control input" list="cities" id="exampleDataList" placeholder="Choose The City" disabled name="city">
+                <input class="form-control input" list="cities" id="exampleDataList" placeholder="Choose The City"  name="city">
                 <datalist id="cities">
                   @foreach ($cities->pluck('name')->toArray() as $city)
                       <option value={{$city}}>
@@ -35,22 +25,12 @@
                 </datalist>
           </div>
                 <div class="form-group">
-                    <div class="icheck-primary d-inline">
-                        <input type="checkbox" id="checkboxPrimary1" class="check">
-                        <label for="checkboxPrimary1">
-                        </label>
-                      </div>
                     <label for="exampleInputEmail1">Phone</label>
-                    <input type="text" class="form-control input" id="exampleInputEmail1" placeholder="Enter Phone" name="phone" disabled>
+                    <input type="text" class="form-control input" id="exampleInputEmail1" placeholder="Enter Phone" name="phone" >
                 </div>
                 <div class="form-group">
-                  <div class="icheck-primary d-inline">
-                      <input type="checkbox" id="checkboxPrimary1" class="check">
-                      <label for="checkboxPrimary1">
-                      </label>
-                    </div>
                   <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control input" id="exampleInputEmail1" placeholder="Enter Email" name="email" disabled>
+                  <input type="email" class="form-control input" id="exampleInputEmail1" placeholder="Enter Email" name="email" >
                 </div>
                 <div class="form-group">
                 <label for="exampleInputEmail1">food Categories</label>
