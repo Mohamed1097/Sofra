@@ -131,6 +131,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href={{route('admin.food-categories.index')}} class="nav-link @if (getUrl( url()->current(),'food-categories'))
+              active
+            @endif">
+              <i class="nav-icon fa fa-list-alt"></i>
+              <p>Food Categories</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href={{route('admin.users.index')}} class="nav-link @if (getUrl( url()->current(),'users'))
               active
             @endif">

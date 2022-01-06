@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RoleController;
@@ -33,6 +34,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::resource('restaurants',RestaurantController::class);
     Route::resource('roles',RoleController::class);
     Route::resource('users',UserController::class);
+    Route::resource('food-categories',FoodCategoryController::class);
 
     
   });
