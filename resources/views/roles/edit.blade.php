@@ -20,10 +20,7 @@
             @enderror
         </div>
         <div class="form-group">
-            
             <label for="exampleInputEmail1">Permissions</label>
-            <br>
-            <input type="checkbox" class="select-all"><label for="">Select All</label>
             {!! Form::select('permissions[]', $permissions->pluck('name','id')->toArray(),$role->permissions->pluck('id'), ['class'=>'form-control ','multiple' => true]) !!}
             @error('permissions')
             <small style="color: #dc3545">{{ $message }}</small> 

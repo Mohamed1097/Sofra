@@ -18,7 +18,6 @@
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Permissions</label>
-            <input type="checkbox" class="select-all"><label for="">Select All</label>
             <select class="selectpicker input form-control" multiple data-mdb-filter="true" name="permissions[]">
               @foreach ($permissions->all() as $permission)
                   <option value={{$permission->id}}>{{$permission->name}}</option>
