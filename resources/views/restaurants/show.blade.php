@@ -123,6 +123,8 @@
                     <th>content</th>
                     <th>price</th>
                     <th>price In Offer</th>
+                    <th>Sales</th>
+                    <th>Control</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -136,6 +138,15 @@
                         <td>{{$meal->content}}</td>
                         <td>{{$meal->price}}</td>
                         <td>{{$meal->price_in_offer}}</td>
+                        <td>
+                          {{$meal->orders->first()->meals->find($meal->id)->pivot->where('meal_id',$meal->id)->sum('quantity')}}
+                        </td>
+                        <td>
+                          <button class="btn btn-danger delete-btn" type='submit' element='{{$meal->name}}' data-toggle="modal" data-target='#delete-modal' url={{route('admin.meals.destroy',['meal'=>$meal->id])}}>
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </td>
+                        
                       </tr>
                       @endforeach
                       @endif
@@ -147,6 +158,8 @@
                     <th>content</th>
                     <th>price</th>
                     <th>price In Offer</th>
+                    <th>Sales</th>
+                    <th>Control</th>
                   </tr>
                   </tfoot>
                 </table>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MealController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -35,7 +36,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::resource('roles',RoleController::class);
     Route::resource('users',UserController::class);
     Route::resource('food-categories',FoodCategoryController::class);
-
+    Route::resource('meals',MealController::class);
     
   });
 });

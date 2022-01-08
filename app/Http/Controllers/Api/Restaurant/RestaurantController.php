@@ -91,6 +91,10 @@ class RestaurantController extends Controller
         $meal=Meal::where('id',$request->meal_id)->where('restaurant_id',$request->user()->id)->first();
         if($meal!=null)
         {
+            if ($meal->orders()->where('status','pending')->orWhere('status','accepted')->count()) {
+                return responseJson(0,'لا تستطيع مسح هذه الوجبه حاليا');
+                
+            }
             $meal->delete();
             return responseJson(1,'تم مسح الوجبه بنجاح');
         }

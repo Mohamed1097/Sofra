@@ -139,6 +139,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href={{route('admin.meals.index')}} class="nav-link @if (getUrl( url()->current(),'meals'))
+              active
+            @endif">
+              <i class="nav-icon fas fa-hamburger"></i>
+              <p>Meals</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href={{route('admin.users.index')}} class="nav-link @if (getUrl( url()->current(),'users'))
               active
             @endif">
