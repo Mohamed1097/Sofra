@@ -139,7 +139,13 @@
                         <td>{{$meal->price}}</td>
                         <td>{{$meal->price_in_offer}}</td>
                         <td>
-                          {{$meal->orders->first()->meals->find($meal->id)->pivot->where('meal_id',$meal->id)->sum('quantity')}}
+                          @if ($item=$meal->orders->first()->meals()->whereHas('orders',function($query){
+                              $query->where('status','accepted')->orWhere('status','delivered');
+                          })->find($meal->id))
+                              {{$item->pivot->where('meal_id',$meal->id)->sum('quantity')}}
+                          @else
+                              0
+                          @endif
                         </td>
                         <td>
                           <button class="btn btn-danger delete-btn" type='submit' element='{{$meal->name}}' data-toggle="modal" data-target='#delete-modal' url={{route('admin.meals.destroy',['meal'=>$meal->id])}}>
