@@ -38,14 +38,10 @@
                         <td>{{$meal->name}}</td>
                         <td>{{$meal->restaurant->name}}</td>
                         <td>
-                          @if ($meal->orders->first()->meals()->whereHas('orders',
-                          function($query){
+                          @if ($item=$meal->orders->first()->meals()->whereHas('orders',function($query){
                               $query->where('status','accepted')->orWhere('status','delivered');
                           })->find($meal->id))
-                              {{$meal->orders->first()->meals()->whereHas('orders',
-                              function($query){
-                                  $query->where('status','accepted')->orWhere('status','delivered');
-                              })->find($meal->id)->pivot->where('meal_id',$meal->id)->sum('quantity')}}
+                              {{$item->pivot->where('meal_id',$meal->id)->sum('quantity')}}
                           @else
                               0
                           @endif
