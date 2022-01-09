@@ -139,10 +139,12 @@
                         <td>{{$meal->price}}</td>
                         <td>{{$meal->price_in_offer}}</td>
                         <td>
-                          @if ($item=$meal->orders->first()->meals()->whereHas('orders',function($query){
-                              $query->where('status','accepted')->orWhere('status','delivered');
-                          })->find($meal->id))
-                              {{$item->pivot->where('meal_id',$meal->id)->sum('quantity')}}
+                          @if ($item=$meal->orders->first())
+                              @if ($item=$item->meals()->whereHas('orders',function($query){
+                                $query->where('status','accepted')->orWhere('status','delivered');
+                            })->find($meal->id))
+                                  {{$item->pivot->where('meal_id',$meal->id)->sum('quantity')}}  
+                              @endif
                           @else
                               0
                           @endif

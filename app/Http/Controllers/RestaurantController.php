@@ -140,12 +140,13 @@ class RestaurantController extends Controller
             $mealMessage=$restaurant->name.' Have No Meals';
         }
         $title=$restaurant->name.' Details';
+        $meals=$meals->orderBySales()->paginate(1,['*'],'meal');
         return view('restaurants.show',[
         'title'=>$title,'restaurant'=>$restaurant,
         'orders'=>$orders->paginate(1,['*'],'order')->appends(request()->query()),
         'orderMessage'=>$orderMessage,'offers'=>$offers->paginate(1,['*'],'offer')->appends(request()->query()),
         'offerMessage'=>$offerMessage,
-        'meals'=>$meals->paginate(1,['*'],'meal')->appends(request()->query()),
+        'meals'=>$meals->appends(request()->query()),
         'mealMessage'=>$mealMessage
     ]);  
        

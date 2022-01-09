@@ -95,6 +95,10 @@ class RestaurantController extends Controller
                 return responseJson(0,'لا تستطيع مسح هذه الوجبه حاليا');
                 
             }
+            if(FacadesFile::exists(public_path($meal->meal_image)))
+            {
+                FacadesFile::delete(public_path($meal->meal_image)); 
+            }
             $meal->delete();
             return responseJson(1,'تم مسح الوجبه بنجاح');
         }

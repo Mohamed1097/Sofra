@@ -21,4 +21,10 @@ class Meal extends Model
         return $this->belongsToMany('App\Models\Order');
     }
 
+    public function scopeOrderBySales($query){
+        return $query->selectRaw('*,
+        (select sum(`meal_order`.`quantity`) from `orders` inner join `meal_order` on `orders`.`id` = `meal_order`.`order_id` where `meals`.`id` = `meal_order`.`meal_id`)
+         as sales_count')->orderBy('sales_count','desc');
+    }
+
 }

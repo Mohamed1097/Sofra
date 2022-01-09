@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meal;
+use Illuminate\Support\Facades\File as FacadesFile;
 use Illuminate\Http\Request;
 
 class MealController extends Controller
@@ -14,6 +15,9 @@ class MealController extends Controller
      */
     public function index(Request $request)
     {
+        ////$meal = Meal::first();
+        //$sum = $meal->orders()->count('meal_order.quantity');
+        //dd($sum);
         
         $meals=new Meal();
         $message=null;
@@ -23,7 +27,8 @@ class MealController extends Controller
         if (!$meals->count()) {
             $message='There Is No Meals';
         }
-        return view('meals.index',['title'=>'Meals','meals'=>$meals->paginate(),'message'=>$message]);
+        $meals = $meals->orderBySales()->paginate();
+        return view('meals.index',['title'=>'Meals','meals'=>$meals,'message'=>$message]);
     }
 
     /**
@@ -92,6 +97,10 @@ class MealController extends Controller
         $meal=Meal::findOrFail($id);
         if ($meal->orders()->where('status','pending')->OrWhere('status','accepted')->count()) {
             return responseJson(0,'لا تستطيع حذف هذه الوجبه حاليا');
+        }
+        if(FacadesFile::exists(public_path($meal->meal_image)))
+        {
+            FacadesFile::delete(public_path($meal->meal_image)); 
         }
         $meal->delete();
         return responseJson(1,'تم مسح الوجبه بنجاح');
