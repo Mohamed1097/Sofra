@@ -17,7 +17,11 @@
           <label for="exampleInputEmail1">Roles</label>
           <br>
           <input type="checkbox" class="select-all"><label for="">Select All</label>
-          {!! Form::select('roles[]', $roles->pluck('name','id')->toArray(),$user->roles->pluck('id'), ['class'=>'form-control','multiple' => true]) !!}
+          
+          {!! Form::select('roles[]', $roles->pluck('name','id')->toArray(),$user->roles
+          ->pluck('id'), ['class'=>'form-control','multiple' => true]) !!}
+
+          
           @error('roles')
           <small style="color: #dc3545">{{ $message }}</small> 
           @enderror

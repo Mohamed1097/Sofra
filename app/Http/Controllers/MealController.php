@@ -27,6 +27,7 @@ class MealController extends Controller
         if (!$meals->count()) {
             $message='There Is No Meals';
         }
+        
         $meals = $meals->orderBySales()->paginate();
         return view('meals.index',['title'=>'Meals','meals'=>$meals,'message'=>$message]);
     }

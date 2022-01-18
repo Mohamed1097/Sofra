@@ -15,6 +15,7 @@
                   <tr>
                     <th>Id</th>
                     <th>Name</th>
+                    <th>permissions</th>
                     <th>Control</th>
                   </tr>
                   </thead>
@@ -28,6 +29,9 @@
                       <tr>
                         <td>{{$role->id}}</td>
                         <td>{{$role->name}}</td>
+                        <td>@foreach ($role->permissions as $permission)
+                          <span>{{$permission->name}} , </span>        
+                          @endforeach</td>
                         <td>
                             <a class="btn btn-info" href={{route("admin.roles.edit",['role'=>$role->id])}}>
                                 <i class="fas fa-edit"></i>
@@ -44,6 +48,7 @@
                   <tr>
                     <th>Id</th>
                     <th>Name</th>
+                    <th>permissions</th>
                     <th>Control</th>
                   </tr>
                   </tfoot>
@@ -60,6 +65,6 @@
             
             </div>
           </div>
+          
     </section>
-
 @endsection

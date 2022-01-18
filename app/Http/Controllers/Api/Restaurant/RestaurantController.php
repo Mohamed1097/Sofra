@@ -23,7 +23,7 @@ class RestaurantController extends Controller
             'content'=>'required|string',
             'price'=>'required|between:0,99.99',
             'price_in_offer'=>'required|between:0,99.99',
-            'meal_image'=>'required|mimes:jpeg,jpg,png,gif|max:2000000',
+            'meal_image'=>'required|mimes:jpeg,jpg,png,gif|max:2048',
             'preparation_time'=>'required|integer'
         ]);
         if($validator->fails())

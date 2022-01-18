@@ -21,6 +21,7 @@
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Permissions</label>
+
             {!! Form::select('permissions[]', $permissions->pluck('name','id')->toArray(),$role->permissions->pluck('id'), ['class'=>'form-control ','multiple' => true]) !!}
             @error('permissions')
             <small style="color: #dc3545">{{ $message }}</small> 

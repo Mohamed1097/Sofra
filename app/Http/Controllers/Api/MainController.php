@@ -8,7 +8,6 @@ use App\Models\Contact;
 use App\Models\FoodCategory;
 use App\Models\Neighborhood;
 use App\Models\Notification;
-use App\Models\Restaurant;
 use App\Models\Token;
 use Illuminate\Http\Request;
 
@@ -16,7 +15,7 @@ class MainController extends Controller
 {
     public function getCities(Request $request)
     {
-        info("m.ibrahim");
+        
         return responseJson(1,'success',City::paginate());
     }
     public function getNeighborhoods(Request $request)
